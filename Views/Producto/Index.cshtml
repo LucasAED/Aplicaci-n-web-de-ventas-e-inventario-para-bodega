@@ -1,0 +1,116 @@
+@model IEnumerable<BodegaAdriana.Models.Producto>
+
+@{
+    var counts = ViewBag.CarritoCounts as Dictionary<int,int> ?? new Dictionary<int,int>();
+}
+
+<div class="container mt-4">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold display-6"><span style="color:#193376;">Productos</span></h2>
+        <p class="text-muted mb-0">¡Bienvenido a tu bodega de confianza! Encuentra golosinas, snacks, frutas, verduras y productos de limpieza de la mejor calidad y al mejor precio. ¡Gracias por visitarnos!</p>
+    </div>
+
+    <!-- Barra de acciones -->
+    <div class="d-flex justify-content-end align-items-center gap-2 mb-3">
+        <form asp-controller="Carrito" asp-action="Index" method="get" class="m-0">
+            <button type="submit" class="btn btn-custom-green fw-semibold">
+                Ir al carrito 🛒
+            </button>
+        </form>
+
+        <button id="vaciarCarritoBtn" type="button" class="btn btn-custom-red fw-semibold">
+            Vaciar carrito ❌
+        </button>
+    </div>
+
+    <!-- Categorías de productos -->
+    @foreach (var categoria in new[] { "Golosinas", "Snacks", "Frutas", "Verduras", "Productos de limpieza" })
+    {
+        var idCategoria = categoria == "Productos de limpieza" ? "Productosdelimpieza" : categoria.Replace(" ", "");
+        <h3 id="@idCategoria" class="mt-5 mb-3">
+            @(categoria == "Golosinas" ? "🍫🍫 " :
+              categoria == "Snacks" ? "🥨🥨 " :
+              categoria == "Frutas" ? "🍎🍎 " :
+              categoria == "Verduras" ? "🥦🥦 " : "🧽🧽 ") @categoria
+        </h3>
+
+        <div class="row g-3">
+            @foreach (var p in Model.Where(p => p.Categoria == categoria))
+            {
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow categoria-card position-relative">
+
+                        <div id="badge-producto-@p.IdProducto" class="badge-producto" style="display:@(counts.ContainsKey(p.IdProducto) ? "flex" : "none")">
+                            <span style="font-size:1.1em; margin-right:4px;">🛒</span>
+                            <span class="badge-cantidad">X@(counts.ContainsKey(p.IdProducto) ? counts[p.IdProducto] : 0)</span>
+                        </div>
+
+                        <img src="@p.ImagenUrl" alt="@p.Nombre" class="card-img-top categoria-img" />
+
+                        <div class="card-body text-center d-flex flex-column">
+                            <h6 class="mb-2">@p.Nombre</h6>
+                            <p class="text-muted small mb-2">S/. <strong>@p.Precio</strong></p>
+
+                            <form class="mt-auto agregar-carrito-form" data-producto-id="@p.IdProducto">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Agregar 🛒
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    <script>
+        // Vaciar carrito sin redirigir
+        document.getElementById("vaciarCarritoBtn").addEventListener("click", function () {
+            fetch('/Carrito/Vaciar', { method: 'POST' })
+                .then(() => location.reload());
+        });
+
+        // Agregar producto al carrito sin recargar la página y actualizar contador visual
+        document.querySelectorAll('.agregar-carrito-form').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var id = form.getAttribute('data-producto-id');
+                fetch('/Carrito/Agregar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                    },
+                    body: 'id=' + encodeURIComponent(id)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Feedback visual en el botón
+                        form.querySelector('button').innerText = 'Agregado! ✅';
+                        setTimeout(() => {
+                            form.querySelector('button').innerText = 'Agregar 🛒';
+                        }, 1000);
+                        // Actualizar contador visual
+                        var badge = document.getElementById('badge-producto-' + id);
+                        if (badge) {
+                            var cantidadSpan = badge.querySelector('.badge-cantidad');
+                            let cantidad = parseInt(cantidadSpan.textContent.replace('X','')) || 0;
+                            cantidad++;
+                            cantidadSpan.textContent = 'X' + cantidad;
+                            badge.style.display = 'flex';
+                        }
+                    } else {
+                        alert('Error al agregar al carrito');
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<br>

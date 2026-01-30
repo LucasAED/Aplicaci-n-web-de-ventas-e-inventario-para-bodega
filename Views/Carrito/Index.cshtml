@@ -1,0 +1,105 @@
+@model List<BodegaAdriana.Models.CarritoItem>
+@{
+    ViewData["Title"] = "Carrito";
+    decimal total = Model.Sum(x => x.Cantidad * x.Producto.Precio);
+    int totalProductos = Model.Sum(x => x.Cantidad);
+}
+
+<h2 class="mb-4">🛒 Carrito de Compras</h2>
+
+<div class="row g-4">
+    <!-- Lista de productos -->
+    <div class="col-md-8">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info">No hay productos en el carrito.</div>
+        }
+        else
+        {
+            <table class="table table-striped align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Producto</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-end">Subtotal</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@item.Producto.Nombre</strong><br />
+                                <small>Precio unitario: S/. @item.Producto.Precio</small>
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <!-- Quitar -->
+                                    <form asp-action="Quitar" method="post" class="m-0">
+                                        <input type="hidden" name="id" value="@item.Producto.IdProducto" />
+                                        <button class="btn btn-outline-secondary btn-sm">-</button>
+                                    </form>
+
+                                    <span class="fw-bold">@item.Cantidad</span>
+
+                                    <!-- Agregar -->
+                                    <form asp-action="Agregar" method="post" class="m-0">
+                                        <input type="hidden" name="id" value="@item.Producto.IdProducto" />
+                                        <button class="btn btn-outline-primary btn-sm">+</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                S/. @( (item.Cantidad * item.Producto.Precio).ToString("0.00") )
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="Eliminar" method="post" class="m-0">
+                                    <input type="hidden" name="id" value="@item.Producto.IdProducto" />
+                                    <button class="btn btn-danger btn-sm">🗑</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Acciones -->
+            <div class="d-flex gap-2 mt-3">
+                <form asp-action="Vaciar" method="post" class="m-0">
+                    <button class="btn btn-custom-red" @(Model.Any() ? "" : "disabled")>
+                        Vaciar carrito
+                    </button>
+                </form>
+                <button type="button" class="btn btn-custom-green">Finalizar compra ✅</button>
+            </div>
+        }
+    </div>
+
+    <!-- Recibo -->
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+            <h4 class="mb-3">🧾 Recibo</h4>
+            <p><strong>Bodega Adriana</strong></p>
+            <p><strong>Dirección:</strong> Av. Siempre Viva 123</p>
+            <p><strong>Teléfono:</strong> 987-654-321</p>
+            <p><strong>Correo:</strong> contacto@bodegaadriana.com</p>
+            <p><strong>Fecha:</strong> @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</p>
+            <hr />
+            <h6>Productos:</h6>
+            <ul class="list-unstyled small">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        @item.Producto.Nombre x @item.Cantidad — 
+                        S/. @( (item.Cantidad * item.Producto.Precio).ToString("0.00") )
+                    </li>
+                }
+            </ul>
+            <hr />
+            <p class="fs-5">Total productos: <strong>@totalProductos</strong></p>
+            <p class="fs-5">Total a pagar: <strong>S/. @total.ToString("0.00")</strong></p>
+            <p class="text-success mt-2">¡Gracias por tu compra en Bodega Adriana! 💙</p>
+        </div>
+    </div>
+</div>

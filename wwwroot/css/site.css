@@ -1,0 +1,149 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* ================= NAV ================= */
+
+.custom-navbar {
+  background-color: #193376 !important;
+}
+.custom-navbar .nav-link {
+  color: #fff !important;
+  transition: all .2s ease-in-out;
+}
+.custom-navbar .nav-link:hover {
+  color: #dce9f9 !important;
+  transform: scale(1.05);
+}
+
+/* Espaciado moderado entre ítems */
+.navbar-nav.gap-4 {
+  gap: 2.0rem !important; /* ni tan juntos ni tan separados */
+}
+
+.navbar-nav.gap-5 {
+  gap: 3rem !important; /* más aire entre los botones */
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  background-color: #193376;
+  color: #f8f9fa;
+  padding: 20px 0;
+}
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  text-align: center;
+}
+
+/* ================= CARDS ================= */
+.categoria-card {
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.categoria-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Imágenes */
+.categoria-img {
+  height: 280px; /* antes 220px */
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Ajuste interior */
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ================= BOTONES ================= */
+.btn-primary {
+  background-color: #193376;
+  border: none;
+  color: #f7f7f7;
+  transition: all .2s ease-in-out;
+}
+.btn-primary:hover {
+  background-color: #193376;
+  transform: scale(1.05);
+}
+
+/* Botón verde (carrito) */
+.btn-custom-green {
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  transition: all .2s ease-in-out;
+}
+.btn-custom-green:hover {
+  background-color: #206e10;
+  transform: scale(1.05);
+}
+
+/* Botón rojo (vaciar) */
+.btn-custom-red {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  transition: all .2s ease-in-out;
+}
+.btn-custom-red:hover {
+  background-color: #9c2828;
+  transform: scale(1.05);
+}
+
+/* ================= MENSAJE PRODUCTO AGREGADO ================= */
+.badge-producto {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #198754;
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 4px 10px;
+  border-radius: 16px;
+  min-width: 36px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(25,135,84,0.15);
+  z-index: 2;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ================== CONTACTO ================== */
+.card {
+    border-radius: 12px;
+    transition: all .2s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+form .form-control {
+    border-radius: 8px;
+}
+

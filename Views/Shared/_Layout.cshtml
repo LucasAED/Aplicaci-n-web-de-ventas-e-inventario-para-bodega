@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bodega Adriana - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar mb-4">
+        <div class="container">
+            <!-- Marca -->
+            <a class="navbar-brand fw-bold fs-4" asp-controller="Home" asp-action="Index">🏪 Bodega Adriana</a>
+
+            <!-- Botón responsive -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Opciones -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-5"> <!-- más separación -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Home" asp-action="Index">🏠 Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Producto" asp-action="Index">🛍 Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Carrito" asp-action="Index">🛒 Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Contacto" asp-action="Index">📞 Contáctanos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container flex-fill">
+        @RenderBody()
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-auto">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <span><strong>📍 Dirección:</strong> Av. Siempre Viva 123</span>
+            <span><strong>✉ Correo:</strong> contacto@bodegaadriana.com</span>
+            <span><strong>☎ Teléfono:</strong> 987-654-321</span>
+            <span>© @DateTime.Now.Year Bodega Adriana. Todos los derechos reservados.</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

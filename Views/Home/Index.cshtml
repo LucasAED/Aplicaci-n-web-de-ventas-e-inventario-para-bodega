@@ -1,0 +1,137 @@
+﻿@model IEnumerable<BodegaAdriana.Models.Producto>
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="container mt-4">
+
+    <!-- HERO PRINCIPAL -->
+    <div class="text-center bg-light p-5 rounded shadow-sm mb-5">
+        <h1 class="display-4 fw-bold text-dark">
+            Bienvenido a <span style="color:#193376;">Bodega Adriana</span> 🏪
+        </h1>
+        <p class="lead mt-3">
+            Tu bodega de confianza con <strong>golosinas, snacks, frutas, verduras y productos de limpieza</strong> al mejor precio.
+        </p>
+        <a href="/Producto" class="btn btn-primary btn-lg mt-3">Explorar productos 🛒</a>
+    </div>
+
+    <!-- CATEGORÍAS -->
+    <h2 class="text-center fw-bold mb-4" style="color:#193376;">Explora nuestras categorías</h2>
+    <div class="row justify-content-center mb-5 g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm categoria-card">
+                <img src="/images/KGolosinas.jpg" class="card-img-top categoria-img" alt="Golosinas">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold" style="color:#193376;">🍫 Golosinas</h5>
+                    <a href="/Producto#Golosinas" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm categoria-card">
+                <img src="/images/KSnacks.jpg" class="card-img-top categoria-img" alt="Snacks">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold" style="color:#193376;">🥨 Snacks</h5>
+                    <a href="/Producto#Snacks" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm categoria-card">
+                <img src="/images/KFrutas.jpg" class="card-img-top categoria-img" alt="Frutas">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold" style="color:#193376;">🍎 Frutas</h5>
+                    <a href="/Producto#Frutas" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm categoria-card">
+                <img src="/images/KVerduras.jpg" class="card-img-top categoria-img" alt="Verduras">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold" style="color:#193376;">🥦 Verduras</h5>
+                    <a href="/Producto#Verduras" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm categoria-card">
+                <img src="/images/KProductos de limpieza.jpg" class="card-img-top categoria-img" alt="Productos de limpieza">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold" style="color:#193376;">🧽 Limpieza</h5>
+                    <a href="/Producto#Productosdelimpieza" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BENEFICIOS -->
+    <h2 class="text-center fw-bold mb-4" style="color:#193376;">¿Por qué elegirnos?</h2>
+    <div class="row text-center mb-5">
+        <div class="col-md-4">
+            <div class="p-4 shadow-sm rounded bg-white h-100">
+                <h4 style="color:#193376;">✅ Calidad Garantizada</h4>
+                <p>Seleccionamos los mejores productos frescos y de marcas reconocidas para ti y tu familia.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 shadow-sm rounded bg-white h-100">
+                <h4 style="color:#193376;">💸 Precios Justos</h4>
+                <p>Ofertas permanentes y precios accesibles para que ahorres en cada compra.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 shadow-sm rounded bg-white h-100">
+                <h4 style="color:#193376;">🚚 Delivery Rápido</h4>
+                <p>Recibe tus compras en la puerta de tu casa de forma rápida y segura.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO EXTRA -->
+    <div class="bg-light p-4 rounded shadow-sm mb-5">
+        <h3 class="fw-bold text-center mb-3" style="color:#193376;">Nuestra Promesa</h3>
+        <p>
+            En <strong style="color:#193376;">Bodega Adriana</strong> nos preocupamos por tu bienestar y comodidad. 
+            Disfruta de una experiencia de compra sencilla, rápida y segura desde la comodidad de tu hogar.
+        </p>
+        <p>
+            Contamos con atención personalizada y asesoría para que encuentres lo que realmente necesitas. 
+            ¡Gracias por confiar en nosotros!
+        </p>
+    </div>
+
+    <!-- TESTIMONIOS -->
+    <h2 class="text-center fw-bold mb-4" style="color:#193376;">Lo que dicen nuestros clientes</h2>
+    <div class="row text-center mb-5 g-4">
+        <div class="col-md-4">
+            <div class="p-3 shadow-sm rounded bg-white h-100">
+                <p>"Excelente atención y productos frescos siempre. Mi bodega favorita."</p>
+                <small>- Ana M.</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 shadow-sm rounded bg-white h-100">
+                <p>"Precios muy buenos y el delivery siempre llega puntual. ¡Recomendado!"</p>
+                <small>- José R.</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 shadow-sm rounded bg-white h-100">
+                <p>"Gran variedad de productos y un servicio muy amable."</p>
+                <small>- Laura G.</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA FINAL -->
+    <div class="text-center my-5">
+        <div class="p-5 rounded shadow-sm" style="background-color:#193376; color:#fff;">
+            <h3 class="fw-bold">Compra fácil, rápido y seguro</h3>
+            <p class="lead">Explora nuestros productos, llena tu carrito y recibe todo en tu hogar.</p>
+            <a href="/Producto" class="btn btn-light btn-lg mt-3">Ver catálogo completo</a>
+        </div>
+    </div>
+
+</div>
